@@ -30,16 +30,10 @@ public:
 	// метод для ввода строка с клавиатуры
 	void set_string();
 
-	// константный метод-гэттер
-	const char* get_string() const
-	{
-		return string;
-	}
-
 	// метод вывода строки на экран
 	void print(int number)
 	{
-		std::cout << "RESULT " << number << ": " << string << std::endl;
+		std::cout << "RES STRING " << number << ": " << string << std::endl;
 	}
 
 	// статический метод, возвращает кол-во созданных объектов-строк
@@ -51,8 +45,24 @@ public:
 	// функция для конкатенации строк (перегрузка оператора +)
 	MyString operator+ (const MyString&);
 
+	// метод добавлениея к концу объекта-строки одного символа 'x'
+	MyString operator++(int);
+
+	// метод удаление одного символа из конца объекта-строки
+	MyString operator--(int);
+
+	// MyString+int (добавить к концу объекта некое кол-во символов 'x')
+	MyString operator+(int number);
+
+	// MyString-int (удалить из конца объекта некое кол-во символов 'x')
+	MyString operator-(int number);
+
+	// перегрузка оператора присваивания, реализующая безопасное присваивание
+	MyString& operator= (const MyString& str);
+
 	~MyString()  // деструктор
 	{
 		delete[] string;
+		string_object--;
 	}
 };
