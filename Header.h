@@ -60,6 +60,9 @@ public:
 	// перегрузка оператора присваивания, реализующая безопасное присваивание
 	MyString& operator= (const MyString& str);
 
+	// перегрузка оператора < (сравнение строк)
+	MyString operator< (const MyString& str);
+
 	~MyString()  // деструктор
 	{
 		delete[] string;

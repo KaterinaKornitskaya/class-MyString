@@ -34,10 +34,8 @@ MyString - int (например, удаление определенного к
 
 int main()
 {
-	// setlocale(LC_ALL, "");
 	std::cout << "Constructor by defoult: allow to create 80-char string:\n";
 	MyString str1;
-	//MyString();
 	str1.print(1);
 	std::cout << std::endl;
 
@@ -59,8 +57,8 @@ int main()
 	std::cout << std::endl;
 
 	std::cout << "Overloaded +, string concatenation:\n";
-	char* s1 = new char[6] {"Ivan "};        // строки для конкатенации
-	char* s2 = new char [10] {"Ivanovich"};  // строки для конкатенации
+	char* s1 = new char[6] {"Ivan "};    // строки для конкатенации
+	char* s2 = new char [10] {"Ivan "};  // строки для конкатенации
 	MyString str5(s1);
 	MyString str6(s2);
 	MyString str7 = str5 + str6;
@@ -77,26 +75,25 @@ int main()
 	std::cout << "Overloaded --: remov one char from the end of string:\n";
 	MyString str9;
 	str9.set_string();
-	//MyString str8 = str9;
 	str9--;
 	str9.print(7);
 	std::cout << std::endl;
 
-	std::cout << "Overloaded+ (MyString+int): add 4 char 'x' to the end of string:\n";
-	//MyString str11;
-	//str11.set_string();
-	//int number = 4;
+	std::cout << "Overloaded + (MyString+int): add 4 char 'x' to the end of string:\n";
 	MyString str11;
 	str11 = str9 + 4;
 	str11.print(8);
 	std::cout << std::endl;
 
-	std::cout << "Overloaded- (MyString-int): delete 3 char from the end of string:\n";
+	std::cout << "Overloaded - (MyString-int): delete 3 char from the end of string:\n";
 	MyString str12;
-	//str13.set_string();	
 	str12 = str9 - 3;
 	str12.print(9);
 	std::cout << std::endl;
+
+	std::cout << "Overloaded < \n";
+	MyString str15 = str5 < str6;
+	str15.print(10);
 
 	std::cout << "Total number of objects-strings: "  // вывод кол-ва объектов-строк
 		<< MyString::get_string_object() << '\n';     // считали в статической ф-ии

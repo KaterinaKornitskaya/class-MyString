@@ -174,3 +174,27 @@ MyString& MyString::operator= (const MyString& obj)
 	strcpy(string, obj.string);      // инициализация строки
 	return *this;
 }
+
+// перегрузка оператора < (сравнение строк)
+MyString MyString::operator< (const MyString& str)
+{
+	int res = strcmp(string, str.string);  // ф-ия сравнения строк
+	if (res > 0)  // результат +1 - если 1ая строка больше
+	{
+		char buffer[50]{ "1st string is bigger." };
+		MyString RES(buffer);
+		return RES;
+	}
+	else if (res < 0)  // результат -1 - если 2ая строка больше
+	{
+		char buffer[50]{ "2nd string is bigger."};
+		MyString RES(buffer);
+		return RES;
+	}
+	else if (res == 0)  // результат 0 - если строки равны
+	{
+		char buffer[50]{ "1st = 2nd string.\n" };
+		MyString RES(buffer);
+		return RES;
+	}	
+}
