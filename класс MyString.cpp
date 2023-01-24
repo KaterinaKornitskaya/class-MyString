@@ -52,13 +52,13 @@ int main()
 
 	std::cout << "Constructor with parametr: allow to create string from user:\n";
 	MyString str4;
-	str4.set_string();
+	str4.fill_string();
 	str4.print(4);
 	std::cout << std::endl;
 
 	std::cout << "Overloaded +, string concatenation:\n";
-	char* s1 = new char[6] {"Ivan "};    // строки для конкатенации
-	char* s2 = new char [10] {"Ivan "};  // строки для конкатенации
+	char* s1 = new char[6] {"aaaaa"};    // строки для конкатенации
+	char* s2 = new char [10] {"bbbbb"};  // строки для конкатенации
 	MyString str5(s1);
 	MyString str6(s2);
 	MyString str7 = str5 + str6;
@@ -67,14 +67,14 @@ int main()
 
 	std::cout << "Overloaded ++: add a single 'x' char to the end of string:\n";
 	MyString str8;
-	str8.set_string();
+	str8.fill_string();
 	str8++;
 	str8.print(6);
 	std::cout << std::endl;
 
 	std::cout << "Overloaded --: remov one char from the end of string:\n";
 	MyString str9;
-	str9.set_string();
+	str9.fill_string();
 	str9--;
 	str9.print(7);
 	std::cout << std::endl;
@@ -92,8 +92,22 @@ int main()
 	std::cout << std::endl;
 
 	std::cout << "Overloaded < \n";
-	MyString str15 = str5 < str6;
-	str15.print(10);
+	bool result = str5 < str6;
+	if (result == 1)
+	{
+		std::cout << "true" << std::endl;
+	}
+	else
+	{
+		std::cout << "false" << std::endl;
+	}
+	std::cout << std::endl;
+
+	std::cout << "Overloaded + (int+MyString): add 3 char 'x' to the start of string:\n";
+	MyString str16;
+	str16 = 3 + str7;
+	str16.print(11);
+	std::cout << std::endl;
 
 	std::cout << "Total number of objects-strings: "  // вывод кол-ва объектов-строк
 		<< MyString::get_string_object() << '\n';     // считали в статической ф-ии

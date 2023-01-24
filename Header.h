@@ -7,6 +7,8 @@ class MyString
 	char* string;			   // строка
 	int len;				   // длина строки
 	static int string_object;  // кол-во объектов-строк
+
+	
 public:
 	// Конструктор по умолчанию, позволяющий создать строку 
 	// длиной 80 символов
@@ -28,7 +30,22 @@ public:
 	MyString(const MyString& object);
 
 	// метод для ввода строка с клавиатуры
-	void set_string();
+	void fill_string();
+
+	void set_str(char* str)
+	{
+		len = strlen(str);
+		string = new char[len + 1];
+		if (str)
+		{
+			strcpy(string, str);
+		}
+	}
+
+	char* get_str() const
+	{
+		return string;
+	}
 
 	// метод вывода строки на экран
 	void print(int number)
@@ -61,7 +78,7 @@ public:
 	MyString& operator= (const MyString& str);
 
 	// перегрузка оператора < (сравнение строк)
-	MyString operator< (const MyString& str);
+	bool operator< (const MyString& str);
 
 	~MyString()  // деструктор
 	{
@@ -69,3 +86,6 @@ public:
 		string_object--;
 	}
 };
+
+// глобальная перегрузка оператора + (int + string)
+MyString operator+(int num, MyString cont_string);

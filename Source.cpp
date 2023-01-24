@@ -1,7 +1,6 @@
 #include "Header.h"
 
 int MyString::string_object{ 0 };  // инициализация статического поля
-
 // Конструктор по умолчанию, позволяющий создать строку 
 // длиной 80 символов
 MyString::MyString() : string{ nullptr }, len{ 81 }
@@ -50,10 +49,12 @@ MyString::MyString(const MyString& copy)
 	len = strlen(copy.string) + 1;
 	string = new char[len];       // выделяем новую область памяти для объекта-копии
 	strcpy(string, copy.string);  // копируем содержимое в созданную область памяти
+	std::cout << "Copy!!!";
+	string_object++;
 }
 
 // метод для ввода строка с клавиатуры
-void MyString::set_string()
+void MyString::fill_string()
 {
 	if (string != nullptr) {  // если строка не пустая - 
 		delete[] string;      // очистить строку
@@ -176,25 +177,34 @@ MyString& MyString::operator= (const MyString& obj)
 }
 
 // перегрузка оператора < (сравнение строк)
-MyString MyString::operator< (const MyString& str)
+bool MyString::operator< (const MyString& str)
 {
-	int res = strcmp(string, str.string);  // ф-ия сравнения строк
-	if (res > 0)  // результат +1 - если 1ая строка больше
+	return (strcmp(string, str.string) < 0)  // ф-ия сравнения строк
+		? true  // если результат < 0 - значит 1ая строка < 2oй
+		: false;
+}
+
+// глобальная перегрузка оператора + (int + string)
+MyString operator+(int num, MyString x) 
+{
+	MyString temp;  // создаем временный объект
+	char* str_sym = new char[num + 1];  // стркоа для символов х
+	for (int i{ 0 }; i <= num; ++i)     // цикл по кол-ву символов
 	{
-		char buffer[50]{ "1st string is bigger." };
-		MyString RES(buffer);
-		return RES;
+		if(i < num) str_sym[i] = 'x';        // заполняем х, кроме последнего
+		else if (i==num) str_sym[i] = '\0';  // последний 0-терминатор
 	}
-	else if (res < 0)  // результат -1 - если 2ая строка больше
-	{
-		char buffer[50]{ "2nd string is bigger."};
-		MyString RES(buffer);
-		return RES;
-	}
-	else if (res == 0)  // результат 0 - если строки равны
-	{
-		char buffer[50]{ "1st = 2nd string.\n" };
-		MyString RES(buffer);
-		return RES;
-	}	
+
+	// строка для суммы строк: символы х + наша строка 
+	char* sym_and_str = new char[strlen(str_sym) + strlen(x.get_str()) + 1];
+
+	strcpy(sym_and_str, str_sym);      // в нувую строку копируем строку-х
+	strcat(sym_and_str, x.get_str());  // соединяем новую строку с string
+	temp.set_str(sym_and_str);         // инициализация временного объекта 
+								       // строкой-результатом ф-ии strcat
+
+	delete[] str_sym;
+	delete[] sym_and_str;
+
+	return temp;
 }
