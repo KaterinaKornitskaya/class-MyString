@@ -49,8 +49,20 @@ MyString::MyString(const MyString& copy)
 	len = strlen(copy.string) + 1;
 	string = new char[len];       // выделяем новую область памяти для объекта-копии
 	strcpy(string, copy.string);  // копируем содержимое в созданную область памяти
-	std::cout << "Copy!!!";
+	std::cout << "\nCOPY CONSTRUCTOR\n";
 	string_object++;
+}
+
+// Конструктор перемещения
+MyString::MyString(MyString&& obj)
+{
+	len = strlen( obj.string )+1;
+	string = new char[len];
+
+	obj.string = nullptr;
+	obj.len = 0;
+
+	std::cout << "\nMOVE CONSTRUCTOR\n";
 }
 
 // метод для ввода строка с клавиатуры

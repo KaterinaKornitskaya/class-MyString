@@ -29,6 +29,9 @@ public:
 	// Конструктор копирования
 	MyString(const MyString& object);
 
+	// Конструктор перемещения
+	MyString(MyString&& obj);
+
 	// метод для ввода строка с клавиатуры
 	void fill_string();
 
