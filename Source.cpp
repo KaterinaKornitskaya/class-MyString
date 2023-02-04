@@ -56,8 +56,8 @@ MyString::MyString(const MyString& copy)
 // Конструктор перемещения
 MyString::MyString(MyString&& obj)
 {
-	len = strlen( obj.string )+1;
-	string = new char[len];
+	string = obj.string;
+	len = obj.len;
 
 	obj.string = nullptr;
 	obj.len = 0;
@@ -171,6 +171,7 @@ MyString MyString::operator+(int number)
 	return temp;
 }
 
+// оператор присваивания 
 MyString& MyString::operator= (const MyString& obj)
 {
 	if (this == &obj)  // предотвращение присваиванию самому себе (если адрес
