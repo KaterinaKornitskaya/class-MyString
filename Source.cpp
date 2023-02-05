@@ -46,23 +46,21 @@ MyString::MyString(char* user_string)
 // Конструктор копирования
 MyString::MyString(const MyString& copy)
 {
+	std::cout << "\nCOPY CONSTRUCTOR\n";
 	len = strlen(copy.string) + 1;
 	string = new char[len];       // выделяем новую область памяти для объекта-копии
 	strcpy(string, copy.string);  // копируем содержимое в созданную область памяти
-	std::cout << "\nCOPY CONSTRUCTOR\n";
 	string_object++;
 }
 
 // Конструктор перемещения
-MyString::MyString(MyString&& obj)
+MyString::MyString(MyString&& obj)  // obj - объект, у которого забрали ресурс
 {
-	string = obj.string;
-	len = obj.len;
-
-	obj.string = nullptr;
-	obj.len = 0;
-
 	std::cout << "\nMOVE CONSTRUCTOR\n";
+	string = obj.string;            // теперь создаваемый объект владеет ресурсом
+	len = obj.len;
+	obj.string = nullptr;           // оставляем указатель в согласованном состоянии
+	obj.len = 0;
 }
 
 // метод для ввода строка с клавиатуры
@@ -171,22 +169,44 @@ MyString MyString::operator+(int number)
 	return temp;
 }
 
-// оператор присваивания 
+// перегрузка оператора присваивания с копированием
 MyString& MyString::operator= (const MyString& obj)
 {
-	if (this == &obj)  // предотвращение присваиванию самому себе (если адрес
-	{				   // объекта, для которого вызывается ф-ия (this) и адрес 
-					   // объекта, который передается (& obj) равны
-		return *this;  // то возвращаем этот же объект
+	std::cout << "COPY ASSIGNMENT\n";
+	if (!(this == &obj))            // проверка, что адрес объекта, для которого вызывается метод (this)
+	{                               // и адрес объекта, который поступает в виде параметра (&obj) не равны
+		                            // иначе нет необходимости в копирoвании
+		if (obj.string == nullptr)  // проверка, не является ли поле объекта obj пустой строкой
+		{                           // если является, то выполняем побитовте копирование
+			string = nullptr;
+			len = obj.len;
+			return *this;
+		}
+		if (string != nullptr)      // если строка не пустая - нужно 
+		{                           // освободить динамическуюю память
+			delete[] string;
+		}
+		string = new char[strlen(obj.string) + 1];             // после всех проверок выше выделяем новую динамич.память
+		strcpy_s(string, strlen(obj.string) + 1, obj.string);  // копируем все данные из объекта, который справа от оператора присваивания
+		len = obj.len;                                         // для поля len используем побитовое копирование
 	}
-	if (len != obj.len || len == 0)  // если размеры строк не совпадают или
-	{								 // строка для записи не сформирована
-		delete[] string;             // удаление старой строки
-		len = obj.len;               // вычисление новой длины строки
-		string = new char[len + 1];  // выделение памяти под новую строку
+	return *this;  // возвращаем измененный объект
+}
+
+// перегрузка оператора присваивания с перемещением
+MyString& MyString::operator=(MyString&& obj)
+{
+	std::cout << "MOVE ASSIGNMENT\n";
+	if (!(this == &obj))       // проверка, что адрес объекта, для которого вызывается метод (this)
+	{                          // и адрес объекта, который поступает в виде параметра (&obj) не равны
+						       // иначе нет необходимости в перемещении
+		delete[] string;       // освобождвем память в объекте слева от присваивания
+		string = obj.string;   // перемещаем владение ресурсом в объект, который слева от оп.присваивания
+		len = obj.len;
+		obj.string = nullptr;  // поле string объекта obj, который справа от оп.присваив., оставляем в согласованном состоянии
+		obj.len = 0;
 	}
-	strcpy(string, obj.string);      // инициализация строки
-	return *this;
+	return *this;              // возвращаем измененный объект, который стоит слева от оп.присваив.
 }
 
 // перегрузка оператора < (сравнение строк)

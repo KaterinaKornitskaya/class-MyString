@@ -44,24 +44,24 @@ int main()
 {
 	std::cout << "Constructor by defoult: allow to create 80-char string:\n";
 	MyString str1;
-	str1.print(1);
+	str1.print();
 	std::cout << std::endl;
 
 	std::cout << "Constructor with parametr: allow to create parametr-size string:\n";
 	MyString str2(10);
-	str2.print(2);
+	str2.print();
 	std::cout << std::endl;
 
 	std::cout << "Constructor with parametr: allow to create string from parametr:\n";
 	char* parametr_string = new char[15] {"Hello, world"};
 	MyString str3(parametr_string);
-	str3.print(3);
+	str3.print();
 	std::cout << std::endl;
 
 	std::cout << "Constructor with parametr: allow to create string from user:\n";
 	MyString str4;
 	str4.fill_string();
-	str4.print(4);
+	str4.print();
 	std::cout << std::endl;
 
 	std::cout << "Overloaded +, string concatenation:\n";
@@ -70,33 +70,33 @@ int main()
 	MyString str5(s1);
 	MyString str6(s2);
 	MyString str7 = str5 + str6;
-	str7.print(5);
+	str7.print();
 	std::cout << std::endl;
 
 	std::cout << "Overloaded ++: add a single 'x' char to the end of string:\n";
 	MyString str8;
 	str8.fill_string();
 	str8++;
-	str8.print(6);
+	str8.print();
 	std::cout << std::endl;
 
 	std::cout << "Overloaded --: remov one char from the end of string:\n";
 	MyString str9;
 	str9.fill_string();
 	str9--;
-	str9.print(7);
+	str9.print();
 	std::cout << std::endl;
 
 	std::cout << "Overloaded + (MyString+int): add 4 char 'x' to the end of string:\n";
 	MyString str11;
 	str11 = str9 + 4;
-	str11.print(8);
+	str11.print();
 	std::cout << std::endl;
 
 	std::cout << "Overloaded - (MyString-int): delete 3 char from the end of string:\n";
 	MyString str12;
 	str12 = str9 - 3;
-	str12.print(9);
+	str12.print();
 	std::cout << std::endl;
 
 	std::cout << "Overloaded < \n";
@@ -114,7 +114,7 @@ int main()
 	std::cout << "Overloaded + (int+MyString): add 3 char 'x' to the start of string:\n";
 	MyString str16;
 	str16 = 3 + str7;
-	str16.print(11);
+	str16.print();
 	std::cout << std::endl;
 
 	std::cout << "Total number of objects-strings: "  // вывод кол-ва объектов-строк

@@ -35,6 +35,7 @@ public:
 	// метод дл€ ввода строка с клавиатуры
 	void fill_string();
 
+	// сеттер дл€ строки
 	void set_str(char* str)
 	{
 		len = strlen(str);
@@ -45,15 +46,16 @@ public:
 		}
 	}
 
+	// константный геттер дл€ возврата строки
 	char* get_str() const
 	{
 		return string;
 	}
 
 	// метод вывода строки на экран
-	void print(int number)
+	void print()
 	{
-		std::cout << "RES STRING " << number << ": " << string << std::endl;
+		std::cout << "RES STRING: " << string << std::endl;
 	}
 
 	// статический метод, возвращает кол-во созданных объектов-строк
@@ -77,8 +79,11 @@ public:
 	// MyString-int (удалить из конца объекта некое кол-во символов 'x')
 	MyString operator-(int number);
 
-	// перегрузка оператора присваивани€, реализующа€ безопасное присваивание
+	// перегрузка оператора присваивани€ с копированием
 	MyString& operator= (const MyString& str);
+
+	// перегрузка оператора присваивани€ с перемещением
+	MyString& operator=(MyString&& str);
 
 	// перегрузка оператора < (сравнение строк)
 	bool operator< (const MyString& str);
