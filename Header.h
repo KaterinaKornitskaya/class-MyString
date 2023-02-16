@@ -88,18 +88,7 @@ public:
 	// перегрузка оператора < (сравнение строк)
 	bool operator< (const MyString& str);
 
-	//MyString(const std::initializer_list<char>& list)
-	//	: MyString(list.size())
-	//{
-	//	std::cout << "INITIALIZER LIST\n";
-	//	int i = 0;
-	//	for (auto element : list)
-	//	{
-	//		string[i] = element;
-	//		i++;
-	//	}
-	//}
-
+	// конструктор initializer_list
 	MyString(const std::initializer_list<char>& list)
 		: MyString(list.size())
 	{
@@ -113,11 +102,7 @@ public:
 		string -= len;
 	}
 
-	//char& operator[](int index)
-	//{
-	//	return string[index];
-	//}
-
+	// конструктор initializer_list (второй вариант)
 	//MyString(const std::initializer_list<char>& list)
 	//	: MyString(list.size())
 	//{
