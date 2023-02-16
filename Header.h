@@ -89,31 +89,10 @@ public:
 	bool operator< (const MyString& str);
 
 	// конструктор initializer_list
-	MyString(const std::initializer_list<char>& list)
-		: MyString(list.size())
-	{
-		len = list.size();
-		std::cout << "INITIALIZER LIST\n";
-		for (auto ptr = list.begin(); ptr != list.end(); ptr++)
-		{
-			*string = *ptr;
-			string++;
-		}
-		string -= len;
-	}
+	MyString(const std::initializer_list<char>& list);
 
-	// конструктор initializer_list (второй вариант)
-	//MyString(const std::initializer_list<char>& list)
-	//	: MyString(list.size())
-	//{
-	//	std::cout << "INITIALIZER LIST\n";
-	//	int i = 0;
-	//	for (auto element : list)
-	//	{
-	//		string[i] = element;
-	//		i++;
-	//	}
-	//}
+	// конструктор initializer_list(второй вариант)
+	// MyString(const std::initializer_list<char>& list);
 
 	~MyString()  // деструктор
 	{

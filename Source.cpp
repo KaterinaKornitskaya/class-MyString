@@ -242,3 +242,30 @@ MyString operator+(int num, MyString x)
 	return temp;
 }
 
+// конструктор initializer_list
+MyString::MyString(const std::initializer_list<char>& list)
+	: MyString(list.size())
+{
+	len = list.size();
+	std::cout << "INITIALIZER LIST\n";
+	for (auto ptr = list.begin(); ptr != list.end(); ptr++)
+	{
+		*string = *ptr;
+		string++;
+	}
+	string -= len;
+}
+
+//// конструктор initializer_list(второй вариант)
+//MyString::MyString(const std::initializer_list<char>& list)
+//	: MyString(list.size())
+//{
+//	std::cout << "INITIALIZER LIST\n";
+//	int i = 0;
+//	for (auto element : list)
+//	{
+//		string[i] = element;
+//		i++;
+//	}
+//}
+
