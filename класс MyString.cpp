@@ -42,6 +42,13 @@
 
 int main()
 {
+	MyString string1{ 'a', 'b', 'c', '\0'};
+	string1.print();
+	std::cout << std::endl;
+	//for (int i = 0; i < 3; i++)
+	//{
+	//	std::cout << string1[i] << std::endl;
+	//}
 	std::cout << "Constructor by defoult: allow to create 80-char string:\n";
 	MyString str1;
 	str1.print();

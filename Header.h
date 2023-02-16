@@ -88,6 +88,48 @@ public:
 	// перегрузка оператора < (сравнение строк)
 	bool operator< (const MyString& str);
 
+	//MyString(const std::initializer_list<char>& list)
+	//	: MyString(list.size())
+	//{
+	//	std::cout << "INITIALIZER LIST\n";
+	//	int i = 0;
+	//	for (auto element : list)
+	//	{
+	//		string[i] = element;
+	//		i++;
+	//	}
+	//}
+
+	MyString(const std::initializer_list<char>& list)
+		: MyString(list.size())
+	{
+		len = list.size();
+		std::cout << "INITIALIZER LIST\n";
+		for (auto ptr = list.begin(); ptr != list.end(); ptr++)
+		{
+			*string = *ptr;
+			string++;
+		}
+		string -= len;
+	}
+
+	//char& operator[](int index)
+	//{
+	//	return string[index];
+	//}
+
+	//MyString(const std::initializer_list<char>& list)
+	//	: MyString(list.size())
+	//{
+	//	std::cout << "INITIALIZER LIST\n";
+	//	int i = 0;
+	//	for (auto element : list)
+	//	{
+	//		string[i] = element;
+	//		i++;
+	//	}
+	//}
+
 	~MyString()  // деструктор
 	{
 		delete[] string;

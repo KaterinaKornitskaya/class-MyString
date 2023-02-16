@@ -241,3 +241,4 @@ MyString operator+(int num, MyString x)
 
 	return temp;
 }
+
